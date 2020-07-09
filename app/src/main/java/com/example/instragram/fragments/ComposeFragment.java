@@ -26,10 +26,8 @@ import android.widget.Toast;
 
 import com.example.instragram.Post;
 import com.example.instragram.R;
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -38,7 +36,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,14 +52,6 @@ public class ComposeFragment extends Fragment {
     private File photoFile;
     private String photoFileName = "photo.jpg";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public ComposeFragment() {
         // Required empty public constructor
@@ -94,7 +83,6 @@ public class ComposeFragment extends Fragment {
             }
         });
 
-        //  queryPosts();
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -230,25 +218,6 @@ public class ComposeFragment extends Fragment {
         });
     }
 
-    private void queryPosts() {
-        // Specify which class to query
-        ParseQuery query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER);
-        // Specify the object id
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> posts, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with finding posts", e);
-                    return;
-                } else {
-                    for (Post post : posts) {
-                        Log.i(TAG, "Post: " + post.getDescription() + ", Username: " + post.getUser().getUsername());
-                    }
-                }
 
-            }
-        });
-    }
 }
 
