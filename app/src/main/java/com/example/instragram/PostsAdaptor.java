@@ -40,7 +40,7 @@ public class PostsAdaptor extends RecyclerView.Adapter<PostsAdaptor.Viewholder> 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return posts.size();
     }
 
     class Viewholder extends RecyclerView.ViewHolder{
