@@ -26,8 +26,8 @@ import java.util.List;
 public class PostsFragment extends Fragment {
     public static final String TAG = "PostsFragment";
     private RecyclerView rvPosts;
-    private PostsAdaptor adaptor;
-    private List<Post> allPosts;
+    protected PostsAdaptor adaptor;
+    protected List<Post> allPosts;
 
     public PostsFragment() {
         // Required empty public constructor
@@ -57,10 +57,12 @@ public class PostsFragment extends Fragment {
     }
 
     // hands posts to adaptor
-    private void queryPosts() {
+    protected void queryPosts() {
         // Specify which class to query
         ParseQuery query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
+        query.setLimit(20);
+        query.addDescendingOrder(Post.CREATED_AT);
         // Specify the object id
         query.findInBackground(new FindCallback<Post>() {
             @Override
