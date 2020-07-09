@@ -3,11 +3,15 @@ package com.example.instragram;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseObject;
 
 public class ParseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // Register Parse model
+        ParseObject.registerSubclass(Post.class);
 
         // Copied and pasted from instructions:
         // set applicationId, and server server based on the values in the Heroku settings.
