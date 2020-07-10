@@ -1,11 +1,15 @@
 package com.example.instragram;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Movie;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +19,7 @@ import com.parse.ParseFile;
 
 import java.util.List;
 
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.Viewholder> {
+public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
     private Context context;
     private List<Post> posts;
@@ -27,13 +31,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.Viewholder> 
 
     @NonNull
     @Override
-    public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
-        return new Viewholder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post = posts.get(position);
         holder.bind(post);
     }
@@ -56,16 +60,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.Viewholder> 
     }
 
 
-    class Viewholder extends RecyclerView.ViewHolder{
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvUsername;
         private ImageView ivImage;
         private TextView tvCaption;
 
-        public Viewholder(@NonNull View itemView) {
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             tvCaption = itemView.findViewById(R.id.tvCaption);
             ivImage = itemView.findViewById(R.id.ivImage);
+
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Post post) {
@@ -74,6 +82,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.Viewholder> 
             ParseFile image = post.getImage();
             if(image != null)
                 Glide.with(context).load(image.getUrl()).into(ivImage);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(context, "clicked!", Toast.LENGTH_SHORT).show();
+            int position = getAdapterPosition();
+            if(position != RecyclerView.NO_POSITION){
+                Post post = posts.get(position);
+                String id = post.getObjectId();
+                Intent intent = new Intent(context, PostsDetailActivity.class);
+                intent.putExtra("ID", id);
+                Log.i("Adaptor", "THE ID IS: " + id);
+                context.startActivity(intent);
+            }
         }
     }
 }

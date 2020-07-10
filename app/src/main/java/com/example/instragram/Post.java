@@ -51,13 +51,9 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
-    public Date getCreatedAt() {
-        return getDate(CREATED_AT);
-    }
-
-    public String getRelativeTime(Date createdAt) {
-
+    public String getRelativeTime() {
         long time = getCreatedAt().getTime();
+        Log.i(TAG, "time: " + time);
         long now = System.currentTimeMillis();
         final long diff = now - time;
         if (diff < MINUTE_MILLIS) {
@@ -75,10 +71,10 @@ public class Post extends ParseObject {
         } else if (diff < 7 * DAY_MILLIS) {
             return diff / DAY_MILLIS + " days ago";
         } else if (diff < YEAR_MILLIS) {
-            return String.format("%tB %td", createdAt);
+            return String.format("%tB %td", getCreatedAt());
         } else {
             // display time and date
-            return String.format("%tB %td, %tY", createdAt);
+            return String.format("%tB %td, %tY", getCreatedAt());
         }
     }
 }

@@ -21,15 +21,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvUsername"
+                android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textStyle="bold"
                 tools:text="Chianna_li" />
 
+            <ImageView
+                android:id="@+id/ivPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/avatars" />
+
             <TextView
-                android:id="@+id/tvCaption"
+                android:id="@+id/tvCap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
