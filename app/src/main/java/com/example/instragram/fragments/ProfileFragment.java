@@ -33,7 +33,7 @@ public class ProfileFragment extends PostsFragment {
                     }
                     allPosts.addAll(posts);
                     Log.i(TAG, "Posts added");
-                    adaptor.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
                 }
 
             }

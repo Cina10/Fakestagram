@@ -15,12 +15,12 @@ import com.parse.ParseFile;
 
 import java.util.List;
 
-public class PostsAdaptor extends RecyclerView.Adapter<PostsAdaptor.Viewholder> {
+public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.Viewholder> {
 
     private Context context;
     private List<Post> posts;
 
-    public PostsAdaptor(Context context, List<Post> posts) {
+    public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
         this.posts = posts;
     }
@@ -42,6 +42,19 @@ public class PostsAdaptor extends RecyclerView.Adapter<PostsAdaptor.Viewholder> 
     public int getItemCount() {
         return posts.size();
     }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        posts.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Post> list) {
+        posts.addAll(list);
+        notifyDataSetChanged();
+    }
+
 
     class Viewholder extends RecyclerView.ViewHolder{
         private TextView tvUsername;
