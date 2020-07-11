@@ -86,7 +86,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(context, "clicked!", Toast.LENGTH_SHORT).show();
             int position = getAdapterPosition();
             if(position != RecyclerView.NO_POSITION){
                 Post post = posts.get(position);
