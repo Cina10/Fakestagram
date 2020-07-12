@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    // method that logs user in
     private void login(String username, String password) {
         Log.i(TAG, "login attempted");
         // nav to main act if user signed in correctly
@@ -75,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    // method that signs the user up
     private void signup(final String username, final String password) {
         // make new user
         ParseUser user = new ParseUser();
@@ -88,14 +90,13 @@ public class LoginActivity extends AppCompatActivity {
                             "New Account Created!", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Toast.makeText(LoginActivity.this, "Issue Signing up", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "You already have an account!", Toast.LENGTH_SHORT).show();
                     Log.e(TAG, "Issue with Login", e);
                     return;
                 }
             }
         });
-
-
+        login(username, password);
     }
 
 
